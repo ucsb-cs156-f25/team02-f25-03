@@ -1,9 +1,11 @@
 package edu.ucsb.cs156.example.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +27,10 @@ public class HelpRequest {
   private String teamId;
   private String tableOrBreakoutRoom;
   private LocalDateTime requestTime;
+
+  @Lob
+  @Column(name = "explanation")
   private String explanation;
+
   private boolean solved;
 }
