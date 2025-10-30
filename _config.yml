@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team02-f25-03
 owner: ucsb-cs156-f25
 repo_name: team02-f25-03
-pull_requests: [{"author":{"id":"MDQ6VXNlcjgwNjMwMDQx","is_bot":false,"login":"terryZhouqr","name":"terry"},"headRefName":"TZ-HelpRequest-backend","number":64,"title":"Copy files for Backend CRUD API HelpRequest from team02","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/64"},{"author":{"id":"U_kgDOCM7fCA","is_bot":false,"login":"ChenchangWang1018","name":""},"headRefName":"Chenchang-Copy","number":62,"title":"Copy all article backend files","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/62"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjgwNjMwMDQx","is_bot":false,"login":"terryZhouqr","name":"terry"},"headRefName":"TZ-HelpRequest-backend","number":65,"title":"Copy files for Backend CRUD API HelpRequest from team02","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/65"},{"author":{"id":"U_kgDOCM7fCA","is_bot":false,"login":"ChenchangWang1018","name":""},"headRefName":"Chenchang-Copy","number":62,"title":"Copy all article backend files","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/62"}]
