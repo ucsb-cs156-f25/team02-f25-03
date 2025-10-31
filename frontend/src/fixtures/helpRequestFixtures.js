@@ -38,3 +38,5 @@ export const helpRequestFixtures = {
     }
   ]
 };
+
+export {helpRequestFixtures}
