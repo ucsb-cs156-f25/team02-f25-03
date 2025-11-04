@@ -11,3 +11,5 @@ const recommendationRequest = {
     }
   ]
 };
+
+export { recommendationRequest };
