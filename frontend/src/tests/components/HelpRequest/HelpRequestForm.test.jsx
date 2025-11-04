@@ -171,16 +171,22 @@ describe("HelpRequestForm tests", () => {
     await screen.findByText(/Table Or Breakout Room must be a number\./);
   });
 
+  test("that navigate(-1) is called when clicke Cancle", async () => {
+    expect.hasAssertions();
 
-  test("that navigate is called when clicke Cancle", async () => {
     render(
       <Router>
         <HelpRequestForm />
       </Router>,
     );
+
     await screen.findByTestId("HelpRequestForm-cancel");
     fireEvent.click(screen.getByTestId("HelpRequestForm-cancel"));
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+    await waitFor(() => {
+      expect(mockedNavigate).toHaveBeenCalledWith(-1);
+    });
+
+    expect(mockedNavigate).toHaveBeenCalled();
   });
 });
