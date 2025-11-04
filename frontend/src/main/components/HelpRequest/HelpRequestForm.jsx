@@ -1,34 +1,37 @@
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function HelpRequestForm({
   initialContents,
-  submitAction = () => {},
+  submitAction,
   buttonLabel = "Create",
 }) {
+  // Stryker disable all
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm({ defaultValues: initialContents || {} });
+  // Stryker restore all
 
   const navigate = useNavigate();
-  const testIdPrefix = "HelpRequestForm";
-  const idRegex = /^\d+$/;  
-  const emailRegex = /[^\s@]@[^\s@]+\.[^\s@]+$/i;
-  // Stryker disable next-line regex : don't test regex
-  const isoLocalRegex = /(\d-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)(:[0-5]\D(\.\D))?/i;
+  // Stryker disable Regex
+  const isoLocatRegex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  const idRegex = /^\d+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Stryker restore Regex
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       <Row>
         {initialContents && (
-          <Col md={2}>
+          <Col>
             <Form.Group className="mb-3">
               <Form.Label htmlFor="id">Id</Form.Label>
               <Form.Control
-                data-testid={testIdPrefix + "-id"}
+                data-testid="HelpRequestForm-id"
                 id="id"
                 type="text"
                 {...register("id")}
@@ -39,14 +42,14 @@ function HelpRequestForm({
           </Col>
         )}
 
-        <Col md={5}>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-requesterEmail"}
+              data-testid="HelpRequestForm-requesterEmail"
               id="requesterEmail"
               type="text"
-              placeholder="e.g. student@ucsb.edu"
+              placeholder="e.g. davidgaucho@ucsb.edu"
               isInvalid={Boolean(errors.requesterEmail)}
               {...register("requesterEmail", {
                 required: "Requester Email is required.",
@@ -62,11 +65,11 @@ function HelpRequestForm({
           </Form.Group>
         </Col>
 
-        <Col md={5}>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teamId">Team Id</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-teamId"}
+              data-testid="HelpRequestForm-teamId"
               id="teamId"
               type="text"
               placeholder="e.g. 04"
@@ -84,19 +87,17 @@ function HelpRequestForm({
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
-      </Row>
 
-      <Row>
-        <Col md={6}>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="tableOrBreakoutRoom">
               Table Or Breakout Room
             </Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+              data-testid="HelpRequestForm-tableOrBreakoutRoom"
               id="tableOrBreakoutRoom"
               type="text"
-              placeholder="e.g. 07"
+              placeholder="e.g. 04"
               isInvalid={Boolean(errors.tableOrBreakoutRoom)}
               {...register("tableOrBreakoutRoom", {
                 required: "Table Or Breakout Room is required.",
@@ -112,70 +113,78 @@ function HelpRequestForm({
           </Form.Group>
         </Col>
 
-        <Col md={6}>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">
               Request Time (ISO Format)
             </Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-requestTime"}
+              data-testid="HelpRequestForm-requestTime"
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
               {...register("requestTime", {
-                required: "Request Time is required.",
-                pattern: { },
+                required: true,
+                pattern: isoLocatRegex,
               })}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.requestTime?.message}
+              {errors.requestTime && "Request Time is required."}
             </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="explanation">Explanation</Form.Label>
+            <Form.Control
+              data-testid="HelpRequestForm-explanation"
+              id="explanation"
+              type="text"
+              placeholder="e.g. Gradescope tests failing."
+              isInvalid={Boolean(errors.explanation)}
+              {...register("explanation", {
+                required: "Explanation is required.",
+                maxLength: {
+                  value: 255,
+                  message: "Explanation must be at most 255 characters.",
+                },
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.explanation?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="solved">Solved</Form.Label>
+            <Form.Check
+              data-testid="HelpRequestForm-solved"
+              id="solved"
+              type="switch"
+              isInvalid={Boolean(errors.solved)}
+              {...register("solved")}
+            />
           </Form.Group>
         </Col>
       </Row>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="explanation">Explanation</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={4}
-          data-testid={testIdPrefix + "-explanation"}
-          id="explanation"
-          placeholder="Briefly describe the issue…"
-          isInvalid={Boolean(errors.explanation)}
-          {...register("explanation", {
-            required: "Explanation is required.",
-            maxLength: {
-              value: 250,
-              message: "Explanation must be at most 250 characters.",
-            },
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.explanation?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-4" controlId="solved">
-        <Form.Check
-          type="checkbox"
-          label="Solved"
-          data-testid={testIdPrefix + "-solved"}
-          {...register("solved")}
-        />
-      </Form.Group>
-
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
-        {buttonLabel}
-      </Button>
-      <Button
-        variant="Secondary"
-        onClick={() => navigate(-1)}
-        data-testid={testIdPrefix + "-cancel"}
-        className="ms-2"
-      >
-        Cancel
-      </Button>
+      <Row>
+        <Col>
+          <Button type="submit" data-testid="HelpRequestForm-submit">
+            {buttonLabel}
+          </Button>
+          <Button
+            variant="Secondary"
+            onClick={() => navigate(-1)}
+            data-testid="HelpRequestForm-cancel"
+          >
+            Cancel
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 }
