@@ -2,9 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
-import ArticlesCreatePage, {
-  normalizeDateTime,
-} from "main/pages/Articles/ArticlesCreatePage";
+import { normalizeDateTime } from "main/utils/dateUtils";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 
