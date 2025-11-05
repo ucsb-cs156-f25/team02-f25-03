@@ -172,8 +172,12 @@ describe("HelpRequestForm tests", () => {
     fireEvent.click(screen.getByTestId("HelpRequestForm-submit"));
 
     // Assert the exact messages from your form
-    await screen.findByText(/Team Id must be a number\./);
-    await screen.findByText(/Table Or Breakout Room must be a number\./);
+    expect(
+      await screen.findByText(/Team Id must be a number\./)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Table Or Breakout Room must be a number\./)
+    ).toBeInTheDocument();
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {

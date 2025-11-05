@@ -75,7 +75,7 @@ function HelpRequestForm({
               placeholder="e.g. 04"
               isInvalid={Boolean(errors.teamId)}
               {...register("teamId", {
-                required: "Team Id is required.",
+                required: "Team Id must be a number.",
                 pattern: {
                   value: idRegex,
                   message: "Team Id must be a number.",
@@ -100,7 +100,7 @@ function HelpRequestForm({
               placeholder="e.g. 04"
               isInvalid={Boolean(errors.tableOrBreakoutRoom)}
               {...register("tableOrBreakoutRoom", {
-                required: "Table Or Breakout Room is required.",
+                required: "Table Or Breakout Room must be a number.",
                 pattern: {
                   value: idRegex,
                   message: "Table Or Breakout Room must be a number.",
