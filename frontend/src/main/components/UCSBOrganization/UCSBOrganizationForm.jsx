@@ -87,9 +87,6 @@ function UCSBOrganizationForm({
           <option value="false">False</option>
           <option value="true">True</option>
         </Form.Select>
-        <Form.Control.Feedback type="invalid">
-          {errors.inactive?.message}
-        </Form.Control.Feedback>
       </Form.Group>
 
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
