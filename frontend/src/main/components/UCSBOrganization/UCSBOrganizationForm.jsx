@@ -25,7 +25,7 @@ function UCSBOrganizationForm({
         <Form.Group className="mb-3">
           <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
           <Form.Control
-            data-testid={testIdPrefix + "UCSBOrganizationForm-orgCode"}
+            data-testid={testIdPrefix + "-orgCode"}
             id="orgCode"
             type="text"
             {...register("orgCode")}
@@ -38,10 +38,10 @@ function UCSBOrganizationForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="orgTranslationShort">Organization Short Translation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "UCSBOrganizationForm-orgTranslationShort"}
+          data-testid={testIdPrefix + "-orgTranslationShort"}
           id="orgTranslationShort"
           type="text"
-          isInvalid={Boolean(errors.name)}
+          isInvalid={Boolean(errors.orgTranslationShort)}
           {...register("orgTranslationShort", {
             required: "Organization Short Translation is required.",
             maxLength: {
@@ -51,17 +51,17 @@ function UCSBOrganizationForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.name?.message}
+          {errors.orgTranslationShort?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslationShort">Organization Translation</Form.Label>
+        <Form.Label htmlFor="orgTranslation">Organization Translation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "UCSBOrganizationForm-orgTranslation"}
+          data-testid={testIdPrefix + "-orgTranslation"}
           id="orgTranslation"
           type="text"
-          isInvalid={Boolean(errors.name)}
+          isInvalid={Boolean(errors.orgTranslation)}
           {...register("orgTranslation", {
             required: "Organization Translation is required.",
             maxLength: {
@@ -71,33 +71,34 @@ function UCSBOrganizationForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.name?.message}
+          {errors.orgTranslation?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="inactive">Inactive</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "UCSBOrganizationForm-inactive"}
+        <Form.Select
+          data-testid={testIdPrefix + "-inactive"}
           id="inactive"
-          type="checkbox"
-          isInvalid={Boolean(errors.description)}
-          {...register("inactive", {
-            required: "Inactive is required.",
-          })}
-        />
+          type="string"
+          isInvalid={Boolean(errors.inactive)}
+          {...register("inactive")}
+        >
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </Form.Select>
         <Form.Control.Feedback type="invalid">
-          {errors.description?.message}
+          {errors.inactive?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "UCSBOrganizationForm-submit"}>
+      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
       </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
-        data-testid={testIdPrefix + "UCSBOrganizationForm-cancel"}
+        data-testid={testIdPrefix + "-cancel"}
       >
         Cancel
       </Button>
