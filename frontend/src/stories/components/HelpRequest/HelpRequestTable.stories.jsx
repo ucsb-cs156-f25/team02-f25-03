@@ -2,7 +2,7 @@ import React from "react";
 
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import { http, HttpResponse } from "msw";
-import HelpRequestTable from "frontend/src/main/components/HelpRequest/HelpRequestTable.jsx";
+import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
 import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 
 export default {
