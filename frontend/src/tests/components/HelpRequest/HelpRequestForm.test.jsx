@@ -142,6 +142,7 @@ describe("HelpRequestForm tests", () => {
   });
 
   test("shows numeric pattern errors for Team Id and Table Or Breakout Room", async () => {
+    expect.assertions(2);
     render(
       <Router>
         <HelpRequestForm />
