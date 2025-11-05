@@ -37,12 +37,8 @@ describe("ArticlesCreatePage tests", () => {
     vi.clearAllMocks();
     axiosMock.reset();
     axiosMock.resetHistory();
-    axiosMock
-      .onGet("/api/currentUser")
-      .reply(200, apiCurrentUserFixtures.userOnly);
-    axiosMock
-      .onGet("/api/systemInfo")
-      .reply(200, systemInfoFixtures.showingNeither);
+    axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
+    axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
   });
 
   const queryClient = new QueryClient();
@@ -53,7 +49,7 @@ describe("ArticlesCreatePage tests", () => {
         <MemoryRouter>
           <ArticlesCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     await waitFor(() => {
@@ -79,7 +75,7 @@ describe("ArticlesCreatePage tests", () => {
         <MemoryRouter>
           <ArticlesCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     await waitFor(() => {
@@ -93,15 +89,9 @@ describe("ArticlesCreatePage tests", () => {
     const dateInput = screen.getByLabelText("Date Added");
     const createButton = screen.getByText("Create");
 
-    fireEvent.change(titleInput, {
-      target: { value: "How to test React forms" },
-    });
-    fireEvent.change(urlInput, {
-      target: { value: "https://example.com/how-to-test" },
-    });
-    fireEvent.change(explanationInput, {
-      target: { value: "Step-by-step guide" },
-    });
+    fireEvent.change(titleInput, { target: { value: "How to test React forms" } });
+    fireEvent.change(urlInput, { target: { value: "https://example.com/how-to-test" } });
+    fireEvent.change(explanationInput, { target: { value: "Step-by-step guide" } });
     fireEvent.change(emailInput, { target: { value: "alice@test.edu" } });
     fireEvent.change(dateInput, { target: { value: "2024-10-31" } });
 
@@ -115,79 +105,41 @@ describe("ArticlesCreatePage tests", () => {
       explanation: "Step-by-step guide",
       email: "alice@test.edu",
     });
-
-    expect(axiosMock.history.post[0].params.dateAdded).toBe(
-      "2024-10-31T00:00:00",
-    );
+    expect(axiosMock.history.post[0].params.dateAdded).toBe("2024-10-31T00:00:00");
 
     expect(mockToast).toBeCalledWith(
-      "New article Created - id: 7 title: How to test React forms",
+      "New article Created - id: 7 title: How to test React forms"
     );
-
     expect(mockNavigate).toBeCalledWith({ to: "/articles" });
   });
 
   describe("normalizeDateTime", () => {
-    test("returns v when v is falsy", () => {
-      expect(normalizeDateTime("")).toBe("");
-      expect(normalizeDateTime(undefined)).toBeUndefined();
-      expect(normalizeDateTime(null)).toBeNull();
-    });
-
-    test("adds T00:00:00 for YYYY-MM-DD", () => {
-      expect(normalizeDateTime("2024-10-31")).toBe("2024-10-31T00:00:00");
-    });
-
-    test("keeps original when already has time", () => {
-      expect(normalizeDateTime("2024-10-31T12:34:56")).toBe(
-        "2024-10-31T12:34:56",
-      );
-    });
-  });
-
-  describe("normalizeDateTime", () => {
     test("returns v when v is falsy (undefined/null/empty string)", () => {
+      expect(normalizeDateTime("")).toBe("");
       expect(normalizeDateTime(undefined)).toBeUndefined();
       expect(normalizeDateTime(null)).toBeNull();
-      expect(normalizeDateTime("")).toBe("");
     });
 
-    test("adds T00:00:00 only for YYYY-MM-DD (with dashes)", () => {
+    test("adds T00:00:00 only for strict YYYY-MM-DD (with dashes)", () => {
       expect(normalizeDateTime("2024-10-31")).toBe("2024-10-31T00:00:00");
+
       expect(normalizeDateTime("2024/10/31")).toBe("2024/10/31");
       expect(normalizeDateTime("2024-1-31")).toBe("2024-1-31");
       expect(normalizeDateTime("2024-10-3")).toBe("2024-10-3");
       expect(normalizeDateTime("20241031")).toBe("20241031");
     });
 
-    test("keeps original when there is already a time part", () => {
-      expect(normalizeDateTime("2024-10-31T12:34:56")).toBe(
-        "2024-10-31T12:34:56",
-      );
-      expect(normalizeDateTime("2024-10-31 12:34:56")).toBe(
-        "2024-10-31 12:34:56",
-      );
-    });
-    test("does NOT add time when there is trailing chars", () => {
+    test("does NOT add time when there are leading/trailing extra chars", () => {
+      expect(normalizeDateTime("x2024-10-31")).toBe("x2024-10-31");
+      expect(normalizeDateTime(" 2024-10-31")).toBe(" 2024-10-31");
       expect(normalizeDateTime("2024-10-31x")).toBe("2024-10-31x");
       expect(normalizeDateTime("2024-10-31-01")).toBe("2024-10-31-01");
       expect(normalizeDateTime("2024-10-31 ")).toBe("2024-10-31 ");
     });
 
-    test("does NOT add time when there is leading chars", () => {
-      expect(normalizeDateTime("x2024-10-31")).toBe("x2024-10-31");
-      expect(normalizeDateTime(" 2024-10-31")).toBe(" 2024-10-31");
-    });
-
-    test("does NOT add time for slash or compact formats", () => {
-      expect(normalizeDateTime("2024/10/31")).toBe("2024/10/31");
-      expect(normalizeDateTime("20241031")).toBe("20241031");
-    });
-
     test("keeps original when time part already present", () => {
-      expect(normalizeDateTime("2024-10-31T12:34:56")).toBe(
-        "2024-10-31T12:34:56",
-      );
+      expect(normalizeDateTime("2024-10-31T12:34:56")).toBe("2024-10-31T12:34:56");
+      expect(normalizeDateTime("2024-10-31 12:34:56")).toBe("2024-10-31 12:34:56");
     });
   });
 });
