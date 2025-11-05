@@ -25,7 +25,7 @@ function UCSBOrganizationForm({
         <Form.Group className="mb-3">
           <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
           <Form.Control
-            data-testid={testIdPrefix + "-orgCode"}
+            data-testid={testIdPrefix + "UCSBOrganizationForm-orgCode"}
             id="orgCode"
             type="text"
             {...register("orgCode")}
@@ -38,7 +38,7 @@ function UCSBOrganizationForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="orgTranslationShort">Organization Short Translation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-orgTranslationShort"}
+          data-testid={testIdPrefix + "UCSBOrganizationForm-orgTranslationShort"}
           id="orgTranslationShort"
           type="text"
           isInvalid={Boolean(errors.name)}
@@ -58,7 +58,7 @@ function UCSBOrganizationForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="orgTranslationShort">Organization Translation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-orgTranslation"}
+          data-testid={testIdPrefix + "UCSBOrganizationForm-orgTranslation"}
           id="orgTranslation"
           type="text"
           isInvalid={Boolean(errors.name)}
@@ -78,9 +78,9 @@ function UCSBOrganizationForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="inactive">Inactive</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-inactive"}
+          data-testid={testIdPrefix + "UCSBOrganizationForm-inactive"}
           id="inactive"
-          type="text"
+          type="checkbox"
           isInvalid={Boolean(errors.description)}
           {...register("inactive", {
             required: "Inactive is required.",
@@ -91,13 +91,13 @@ function UCSBOrganizationForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit" data-testid={testIdPrefix + "UCSBOrganizationForm-submit"}>
         {buttonLabel}
       </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
-        data-testid={testIdPrefix + "-cancel"}
+        data-testid={testIdPrefix + "UCSBOrganizationForm-cancel"}
       >
         Cancel
       </Button>
