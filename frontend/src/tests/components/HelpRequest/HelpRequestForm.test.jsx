@@ -83,8 +83,12 @@ describe("HelpRequestForm tests", () => {
     await screen.findByText(/Requester Email is required\./);
 
     expect(screen.getByText(/Requester Email is required\./)).toBeInTheDocument();
-    expect(screen.getByText(/Team Id is required\./)).toBeInTheDocument();
-    expect(screen.getByText(/Table Or Breakout Room is required\./)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Team Id must be a number\./)
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Table Or Breakout Room must be a number\./)
+    ).toBeInTheDocument();
     expect(screen.getByText(/Request Time is required\./)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required\./)).toBeInTheDocument();
   });
