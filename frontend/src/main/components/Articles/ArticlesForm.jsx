@@ -67,11 +67,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "URL is required.",
-            // pattern: {
-            //   value:
-            //     /^(https?:\/\/)([\w\-]+(\.[\w\-]+)+)(:[0-9]+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=%]*)?$/i,
-            //   message: "URL must start with http:// or https://",
-            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -97,22 +92,22 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-{/* Date Added */}
-<Form.Group className="mb-3">
-  <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
-  <Form.Control
-    data-testid={testIdPrefix + "-dateAdded"}
-    id="dateAdded"
-    type="date"
-    isInvalid={Boolean(errors.dateAdded)}
-    {...register("dateAdded", {
-      required: "Date Added is required.",
-    })}
-  />
-  <Form.Control.Feedback type="invalid">
-    {errors.dateAdded?.message}
-  </Form.Control.Feedback>
-</Form.Group>
+      {/* Date Added */}
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateAdded"}
+          id="dateAdded"
+          type="date"
+          isInvalid={Boolean(errors.dateAdded)}
+          {...register("dateAdded", {
+            required: "Date Added is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateAdded?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
 
       {/* Email */}
       <Form.Group className="mb-3">
@@ -125,12 +120,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
-            // // RFC5322-ish pragmatic email regex
-            // pattern: {
-            //   value:
-            //     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            //   message: "Please enter a valid email address",
-            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
