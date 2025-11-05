@@ -54,7 +54,7 @@ describe("HelpRequestForm tests", () => {
     fireEvent.change(explanationField, {
       target: {
         value:
-          "fdsgfdhdfsgzdhrdjtdyrhsegrhtrjdykuryltktjrhegghsgdzhsjdrytkrieureysrgawhsjrdytrhsegwafrshjdrytrthesgawsrhtjdryktfulydjrhsergarhtjrdytk".repeat(10),
+          "ss d f fg. d d s a s de f. g we d cd v sf s. sa v. ds a sf ds s fa sd asd as das s ad ad as dasd a sd asd a".repeat(10),
       },
     });
 
@@ -171,8 +171,9 @@ describe("HelpRequestForm tests", () => {
     await screen.findByText(/Table Or Breakout Room must be a number\./);
   });
 
-  test("that navigate(-1) is called when clicke Cancle", async () => {
-    expect.hasAssertions();
+  test("that navigate(-1) is called when Cancel is clicked", async () => {
+    // pre-assertion so the linter is satisfied immediately
+    expect(mockedNavigate).not.toHaveBeenCalled();
 
     render(
       <Router>
@@ -187,6 +188,8 @@ describe("HelpRequestForm tests", () => {
       expect(mockedNavigate).toHaveBeenCalledWith(-1);
     });
 
+    // explicit assertion outside waitFor (the linter sees this for sure)
     expect(mockedNavigate).toHaveBeenCalled();
   });
+
 });
