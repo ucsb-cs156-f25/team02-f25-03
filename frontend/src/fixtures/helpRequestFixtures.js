@@ -6,7 +6,7 @@ export const helpRequestFixtures = {
     tableOrBreakoutRoom: "Table 5",
     requestTime: "2025-10-30T12:00:00",
     explanation: "no access to GitHub.",
-    solved: false
+    solved: false,
   },
   threeHelpRequests: [
     {
@@ -16,7 +16,7 @@ export const helpRequestFixtures = {
       tableOrBreakoutRoom: "Breakout Room 1",
       requestTime: "2025-10-29T14:20:00",
       explanation: "need help debugging Maven build issues.",
-      solved: false
+      solved: false,
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export const helpRequestFixtures = {
       tableOrBreakoutRoom: "Table 2",
       requestTime: "2025-10-28T15:45:00",
       explanation: "mvn run IT failed after 10 min.",
-      solved: true
+      solved: true,
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export const helpRequestFixtures = {
       tableOrBreakoutRoom: "Breakout Room 3",
       requestTime: "2025-10-27T09:30:00",
       explanation: "unable to login",
-      solved: false
-    }
-  ]
+      solved: false,
+    },
+  ],
 };
