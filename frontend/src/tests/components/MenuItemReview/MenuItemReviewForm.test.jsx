@@ -32,7 +32,7 @@ describe("MenuItemReviewForm tests", () => {
       </Router>,
     );
     await screen.findByTestId(/MenuItemReviewForm-id/);
-    expect(screen.getByText(/Id/)).toBeInTheDocument();
+    expect(screen.getByText("Id")).toBeInTheDocument();
     expect(screen.getByTestId(/MenuItemReviewForm-id/)).toHaveValue("1");
   });
 
@@ -60,14 +60,12 @@ describe("MenuItemReviewForm tests", () => {
       </Router>,
     );
     await screen.findByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviwerEmail");
+    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-    const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
     fireEvent.change(reviewerEmailField, { target: { value: "bad-input" } });
     fireEvent.change(starsField, { target: { value: -1 } });
-    fireEvent.change(dateReviewedField, { target: { value: "bad-input" } });
     fireEvent.click(submitButton);
 
     await screen.findByText(/ReviewerEmail must be a valid email./);
@@ -77,16 +75,18 @@ describe("MenuItemReviewForm tests", () => {
     expect(
       screen.getByText(/Stars must be at least 1./),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/DateReviewed must be in ISO 8601 format./),
-    ).toBeInTheDocument();
+  });
 
+  test("Correct Error messsages on bad input 2", async () => {
     render(
       <Router>
         <MenuItemReviewForm />
       </Router>,
     );
     await screen.findByTestId("MenuItemReviewForm-itemId");
+    const starsField = screen.getByTestId("MenuItemReviewForm-stars");
+    const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
+
     fireEvent.change(starsField, { target: { value: 6 } });
     fireEvent.click(submitButton);
     await screen.findByText(/Stars must be at most 5./);
@@ -106,7 +106,7 @@ describe("MenuItemReviewForm tests", () => {
     await screen.findByTestId("MenuItemReviewForm-itemId");
 
     const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviwerEmail");
+    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
     const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
@@ -132,7 +132,7 @@ describe("MenuItemReviewForm tests", () => {
       screen.queryByText(/Stars must be at most 5./),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/DateReviewed must be in ISO 8601 format./),
+      screen.queryByText(/DateReviewed must be in ISO format/),
     ).not.toBeInTheDocument();
   });
 

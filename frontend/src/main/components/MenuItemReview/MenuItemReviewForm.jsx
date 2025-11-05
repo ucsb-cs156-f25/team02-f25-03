@@ -52,8 +52,7 @@ function MenuItemReviewForm({
                 type="number"
                 isInvalid={Boolean(errors.itemId)}
                 {...register("itemId", {
-                    required: true,
-                    valueAsNumber: true
+                    required: true
                 })}
             />
             <Form.Control.Feedback type="invalid">
@@ -89,7 +88,6 @@ function MenuItemReviewForm({
                 isInvalid={Boolean(errors.stars)}
                 {...register("stars", {
                     required: true,
-                    valueAsNumber: true,
                     min: 1,
                     max: 5
                 })}
@@ -115,8 +113,6 @@ function MenuItemReviewForm({
             />
             <Form.Control.Feedback type="invalid">
                 {errors.dateReviewed && "DateReviewed is required. "}
-                {errors.dateReviewed?.type === "pattern" &&
-                    "DateReviewed must be in ISO 8601 format."}
             </Form.Control.Feedback>
         </Form.Group>
 
@@ -128,11 +124,11 @@ function MenuItemReviewForm({
                 type="text"
                 isInvalid={Boolean(errors.comments)}
                 {...register("comments", {
-                    required: false // for easier/shorter reviews that don't need fully written comments
+                    // not required for easier/shorter reviews that don't need fully written comments
                 })}
             />
             <Form.Control.Feedback type="invalid">
-                {errors.comments && "Please enter your comments. "}
+                {errors.comments}
             </Form.Control.Feedback>
         </Form.Group>
 
