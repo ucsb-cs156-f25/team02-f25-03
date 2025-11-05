@@ -16,11 +16,11 @@ function ArticlesForm({
   // Stryker restore all
 
   const navigate = useNavigate();
-
   const testIdPrefix = "ArticlesForm";
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
+      {/* id only shown when editing (initialContents is defined) */}
       {initialContents && (
         <Form.Group className="mb-3">
           <Form.Label htmlFor="id">Id</Form.Label>
@@ -35,6 +35,7 @@ function ArticlesForm({
         </Form.Group>
       )}
 
+      {/* Title */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="title">Title</Form.Label>
         <Form.Control
@@ -45,8 +46,8 @@ function ArticlesForm({
           {...register("title", {
             required: "Title is required.",
             maxLength: {
-              value: 30,
-              message: "Max length 30 characters",
+              value: 100,
+              message: "Max length 100 characters",
             },
           })}
         />
@@ -55,16 +56,22 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* URL */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="url">URL</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
+          placeholder="https://example.com/article"
           isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "URL is required.",
-            pattern: { value: /^https?:\/\/\S+$/i, message: "URL must start with http(s)://" }
+            // pattern: {
+            //   value:
+            //     /^(https?:\/\/)([\w\-]+(\.[\w\-]+)+)(:[0-9]+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=%]*)?$/i,
+            //   message: "URL must start with http:// or https://",
+            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -72,12 +79,14 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
+      {/* Explanation */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
+          as="textarea"
+          rows={3}
           data-testid={testIdPrefix + "-explanation"}
           id="explanation"
-          type="text"
           isInvalid={Boolean(errors.explanation)}
           {...register("explanation", {
             required: "Explanation is required.",
@@ -88,16 +97,40 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
+{/* Date Added */}
+<Form.Group className="mb-3">
+  <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
+  <Form.Control
+    data-testid={testIdPrefix + "-dateAdded"}
+    id="dateAdded"
+    type="date"
+    isInvalid={Boolean(errors.dateAdded)}
+    {...register("dateAdded", {
+      required: "Date Added is required.",
+    })}
+  />
+  <Form.Control.Feedback type="invalid">
+    {errors.dateAdded?.message}
+  </Form.Control.Feedback>
+</Form.Group>
+
+      {/* Email */}
       <Form.Group className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-email"}
           id="email"
           type="email"
+          placeholder="name@example.com"
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
-            pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email" }
+            // // RFC5322-ish pragmatic email regex
+            // pattern: {
+            //   value:
+            //     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            //   message: "Please enter a valid email address",
+            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -105,29 +138,14 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-dateAdded"}
-          id="dateAdded"
-          type="datetime-local"
-          isInvalid={Boolean(errors.dateAdded)}
-          {...register("dateAdded", {
-            required: "Date added is required.",
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.dateAdded?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
       </Button>
       <Button
-        variant="secondary"
+        variant="Secondary"
         onClick={() => navigate(-1)}
         data-testid={testIdPrefix + "-cancel"}
+        className="ms-2"
       >
         Cancel
       </Button>
