@@ -151,7 +151,7 @@ describe("UserTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/diningcommonsmenuitem")
+      .onDelete("/api/ucsbdiningcommonsmenuitem")
       .reply(200, { message: "Item deleted" });
 
     // act - render the component
