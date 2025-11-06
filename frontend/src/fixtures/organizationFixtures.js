@@ -2,8 +2,8 @@ const organizationFixtures = {
   oneOrganization: [
     {
       orgCode: "pog",
-      organizationTranslationShort: "poggers",
-      organizationTranslation: "poggerschamp",
+      orgTranslationShort: "poggers",
+      orgTranslation: "poggerschamp",
       inactive: false,
     },
   ],
@@ -11,22 +11,22 @@ const organizationFixtures = {
   threeOrganizations: [
     {
       orgCode: "ZPR",
-      organizationTranslationShort: "ZETA PHI RHO",
-      organizationTranslation: "ZETA PHI RHO",
+      orgTranslationShort: "ZETA PHI RHO",
+      orgTranslation: "ZETA PHI RHO",
       inactive: false,
     },
 
     {
       orgCode: "GDC",
-      organizationTranslationShort: "Game Dev Club",
-      organizationTranslation: "Game Development Club",
+      orgTranslationShort: "Game Dev Club",
+      orgTranslation: "Game Development Club",
       inactive: true,
     },
 
     {
       orgCode: "GG",
-      organizationTranslationShort: "Gacuho Gaming",
-      organizationTranslation: "Gaucho Gaming",
+      orgTranslationShort: "Gacuho Gaming",
+      orgTranslation: "Gaucho Gaming",
       inactive: true,
     },
   ],

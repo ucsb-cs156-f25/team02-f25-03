@@ -7,7 +7,6 @@ export default {
   title: "components/HelpRequest/HelpRequestForm",
   component: HelpRequestForm,
   parameters: { layout: "centered" },
-
 };
 
 const Template = (args) => <HelpRequestForm {...args} />;
