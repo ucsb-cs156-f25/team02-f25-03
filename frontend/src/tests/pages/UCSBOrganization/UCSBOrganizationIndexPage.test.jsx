@@ -11,7 +11,6 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import { expect } from "vitest";
-import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
 
 const mockToast = vi.fn();
 vi.mock("react-toastify", async (importOriginal) => {
