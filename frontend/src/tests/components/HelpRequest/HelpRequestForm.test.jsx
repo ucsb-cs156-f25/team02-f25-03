@@ -45,16 +45,22 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByTestId("HelpRequestForm-requesterEmail");
 
-    const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
+    const requesterEmailField = screen.getByTestId(
+      "HelpRequestForm-requesterEmail",
+    );
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-    fireEvent.change(requesterEmailField, { target: { value: "not a requesterEmail" } });
+    fireEvent.change(requesterEmailField, {
+      target: { value: "not a requesterEmail" },
+    });
 
     fireEvent.change(explanationField, {
       target: {
         value:
-          "ss d f fg. d d s a s de f. g we d cd v sf s. sa v. ds a sf ds s fa sd asd as das s ad ad as dasd a sd asd a".repeat(10),
+          "ss d f fg. d d s a s de f. g we d cd v sf s. sa v. ds a sf ds s fa sd asd as das s ad ad as dasd a sd asd a".repeat(
+            10,
+          ),
       },
     });
 
@@ -82,12 +88,14 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Requester Email is required\./);
 
-    expect(screen.getByText(/Requester Email is required\./)).toBeInTheDocument();
     expect(
-      await screen.findByText(/Team Id must be a number\./)
+      screen.getByText(/Requester Email is required\./),
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/Table Or Breakout Room must be a number\./)
+      await screen.findByText(/Team Id must be a number\./),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Table Or Breakout Room must be a number\./),
     ).toBeInTheDocument();
     expect(screen.getByText(/Request Time is required\./)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required\./)).toBeInTheDocument();
@@ -104,18 +112,26 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByTestId("HelpRequestForm-requesterEmail");
 
-    const requesterEmailField = screen.getByTestId("HelpRequestForm-requesterEmail");
+    const requesterEmailField = screen.getByTestId(
+      "HelpRequestForm-requesterEmail",
+    );
     const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
-    const tableOrBreakoutRoomField = screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom");
+    const tableOrBreakoutRoomField = screen.getByTestId(
+      "HelpRequestForm-tableOrBreakoutRoom",
+    );
     const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
     const explanationField = screen.getByTestId("HelpRequestForm-explanation");
     const solvedField = screen.getByTestId("HelpRequestForm-solved");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-    fireEvent.change(requesterEmailField, { target: { value: "testEmailID16@ucsb.edu" } });
+    fireEvent.change(requesterEmailField, {
+      target: { value: "testEmailID16@ucsb.edu" },
+    });
     fireEvent.change(teamIdField, { target: { value: "16" } });
     fireEvent.change(tableOrBreakoutRoomField, { target: { value: "16" } });
-    fireEvent.change(requestTimeField, { target: { value: "2022-01-02T12:00" } });
+    fireEvent.change(requestTimeField, {
+      target: { value: "2022-01-02T12:00" },
+    });
     fireEvent.change(explanationField, {
       target: { value: "pass locally but fail on GitHub." },
     });
@@ -132,13 +148,25 @@ describe("HelpRequestForm tests", () => {
     expect(payload.solved).toBe(true);
 
     // no validation errors present
-    expect(screen.queryByText(/Requester Email must be a valid email address\./)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Requester Email is required\./)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Requester Email must be a valid email address\./),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Requester Email is required\./),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(/Team Id is required\./)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Table Or Breakout Room is required\./)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Request Time is required\./)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Explanation is required\./)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Explanation must be at most 255 characters\./)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Table Or Breakout Room is required\./),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Request Time is required\./),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Explanation is required\./),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Explanation must be at most 255 characters\./),
+    ).not.toBeInTheDocument();
   });
 
   test("shows numeric pattern errors for Team Id and Table Or Breakout Room", async () => {
@@ -165,18 +193,21 @@ describe("HelpRequestForm tests", () => {
     fireEvent.change(screen.getByTestId("HelpRequestForm-teamId"), {
       target: { value: "t16" },
     });
-    fireEvent.change(screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom"), {
-      target: { value: "Table 3" },
-    });
+    fireEvent.change(
+      screen.getByTestId("HelpRequestForm-tableOrBreakoutRoom"),
+      {
+        target: { value: "Table 3" },
+      },
+    );
 
     fireEvent.click(screen.getByTestId("HelpRequestForm-submit"));
 
     // Assert the exact messages from your form
     expect(
-      await screen.findByText(/Team Id must be a number\./)
+      await screen.findByText(/Team Id must be a number\./),
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/Table Or Breakout Room must be a number\./)
+      await screen.findByText(/Table Or Breakout Room must be a number\./),
     ).toBeInTheDocument();
   });
 
@@ -200,5 +231,4 @@ describe("HelpRequestForm tests", () => {
     // explicit assertion outside waitFor (the linter sees this for sure)
     expect(mockedNavigate).toHaveBeenCalled();
   });
-
 });
