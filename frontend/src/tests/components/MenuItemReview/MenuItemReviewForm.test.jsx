@@ -28,7 +28,9 @@ describe("MenuItemReviewForm tests", () => {
   test("renders correctly when passing in a MenuItemReview", async () => {
     render(
       <Router>
-        <MenuItemReviewForm initialContents={menuItemReviewFixtures.oneMenuItemReview} />
+        <MenuItemReviewForm
+          initialContents={menuItemReviewFixtures.oneMenuItemReview}
+        />
       </Router>,
     );
     await screen.findByTestId(/MenuItemReviewForm-id/);
@@ -60,7 +62,9 @@ describe("MenuItemReviewForm tests", () => {
       </Router>,
     );
     await screen.findByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+    const reviewerEmailField = screen.getByTestId(
+      "MenuItemReviewForm-reviewerEmail",
+    );
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
@@ -72,9 +76,7 @@ describe("MenuItemReviewForm tests", () => {
     expect(
       screen.getByText(/ReviewerEmail must be a valid email./),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Stars must be at least 1./),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Stars must be at least 1./)).toBeInTheDocument();
   });
 
   test("Correct Error messsages on bad input 2", async () => {
@@ -90,9 +92,7 @@ describe("MenuItemReviewForm tests", () => {
     fireEvent.change(starsField, { target: { value: 6 } });
     fireEvent.click(submitButton);
     await screen.findByText(/Stars must be at most 5./);
-    expect(
-      screen.getByText(/Stars must be at most 5./),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Stars must be at most 5./)).toBeInTheDocument();
   });
 
   test("No Error messsages on good input", async () => {
@@ -106,16 +106,24 @@ describe("MenuItemReviewForm tests", () => {
     await screen.findByTestId("MenuItemReviewForm-itemId");
 
     const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+    const reviewerEmailField = screen.getByTestId(
+      "MenuItemReviewForm-reviewerEmail",
+    );
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-    const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+    const dateReviewedField = screen.getByTestId(
+      "MenuItemReviewForm-dateReviewed",
+    );
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
     fireEvent.change(itemIdField, { target: { value: 1 } });
-    fireEvent.change(reviewerEmailField, { target: { value: "johndoe@ucsb.edu" } });
+    fireEvent.change(reviewerEmailField, {
+      target: { value: "johndoe@ucsb.edu" },
+    });
     fireEvent.change(starsField, { target: { value: 4 } });
-    fireEvent.change(dateReviewedField, { target: { value:  "2025-11-01T12:00:00"} });
+    fireEvent.change(dateReviewedField, {
+      target: { value: "2025-11-01T12:00:00" },
+    });
     fireEvent.change(commentsField, { target: { value: "Tasty!" } });
 
     fireEvent.click(submitButton);
