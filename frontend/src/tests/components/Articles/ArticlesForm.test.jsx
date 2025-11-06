@@ -27,8 +27,8 @@ describe("ArticlesForm tests", () => {
   const testId = "ArticlesForm";
 
   test("renders correctly with no initialContents", async () => {
-     const submitAction = vi.fn();
-       render(
+    const submitAction = vi.fn();
+    render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <ArticlesForm submitAction={submitAction} />
@@ -77,7 +77,7 @@ describe("ArticlesForm tests", () => {
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     const submitAction = vi.fn();
-       render(
+    render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <ArticlesForm submitAction={submitAction} />
@@ -92,8 +92,8 @@ describe("ArticlesForm tests", () => {
   });
 
   test("that the correct validations are performed", async () => {
-        const submitAction = vi.fn();
-       render(
+    const submitAction = vi.fn();
+    render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <ArticlesForm submitAction={submitAction} />

@@ -1,18 +1,68 @@
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import React from "react";
+import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
+import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
+import { http, HttpResponse } from "msw";
 
-export default function HelpRequestIndexPage() {
-  // Stryker disable all : placeholder for future implementation
-  return (
-    <BasicLayout>
-      <div className="pt-2">
-        <h1>Index page not yet implemented</h1>
-        <p>
-          <a href="/HelpRequest/create">Create</a>
-        </p>
-        <p>
-          <a href="/HelpRequest/edit/1">Edit</a>
-        </p>
-      </div>
-    </BasicLayout>
-  );
-}
+import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
+
+export default {
+  title: "pages/HelpRequest/HelpRequestIndexPage",
+  component: HelpRequestIndexPage,
+};
+
+const Template = () => <HelpRequestIndexPage storybook={true} />;
+
+export const Empty = Template.bind({});
+Empty.parameters = {
+  msw: [
+    http.get("/api/currentUser", () => {
+      return HttpResponse.json(apiCurrentUserFixtures.userOnly, {
+        status: 200,
+      });
+    }),
+    http.get("/api/systemInfo", () => {
+      return HttpResponse.json(systemInfoFixtures.showingNeither, {
+        status: 200,
+      });
+    }),
+    http.get("/api/helprequests/all", () => {
+      return HttpResponse.json([], { status: 200 });
+    }),
+  ],
+};
+
+export const ThreeItemsOrdinaryUser = Template.bind({});
+
+ThreeItemsOrdinaryUser.parameters = {
+  msw: [
+    http.get("/api/currentUser", () => {
+      return HttpResponse.json(apiCurrentUserFixtures.userOnly);
+    }),
+    http.get("/api/systemInfo", () => {
+      return HttpResponse.json(systemInfoFixtures.showingNeither);
+    }),
+    http.get("/api/helprequests/all", () => {
+      return HttpResponse.json(helpRequestFixtures.threeHelpRequests);
+    }),
+  ],
+};
+
+export const ThreeItemsAdminUser = Template.bind({});
+
+ThreeItemsAdminUser.parameters = {
+  msw: [
+    http.get("/api/currentUser", () => {
+      return HttpResponse.json(apiCurrentUserFixtures.adminUser);
+    }),
+    http.get("/api/systemInfo", () => {
+      return HttpResponse.json(systemInfoFixtures.showingNeither);
+    }),
+    http.get("/api/helprequests/all", () => {
+      return HttpResponse.json(helpRequestFixtures.threeHelpRequests);
+    }),
+    http.delete("/api/helprequests", () => {
+      return HttpResponse.json({}, { status: 200 });
+    }),
+  ],
+};

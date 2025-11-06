@@ -97,22 +97,22 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-{/* Date Added */}
-<Form.Group className="mb-3">
-  <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
-  <Form.Control
-    data-testid={testIdPrefix + "-dateAdded"}
-    id="dateAdded"
-    type="date"
-    isInvalid={Boolean(errors.dateAdded)}
-    {...register("dateAdded", {
-      required: "Date Added is required.",
-    })}
-  />
-  <Form.Control.Feedback type="invalid">
-    {errors.dateAdded?.message}
-  </Form.Control.Feedback>
-</Form.Group>
+      {/* Date Added */}
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateAdded">Date Added</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateAdded"}
+          id="dateAdded"
+          type="date"
+          isInvalid={Boolean(errors.dateAdded)}
+          {...register("dateAdded", {
+            required: "Date Added is required.",
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateAdded?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
 
       {/* Email */}
       <Form.Group className="mb-3">
