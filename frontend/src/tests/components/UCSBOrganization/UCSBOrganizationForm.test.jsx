@@ -47,8 +47,9 @@ describe("UCSBOrganization tests", () => {
 
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Organization Translation Short is required./);
+    await screen.findByText(/Organization Code is required./);
     expect(screen.getByText(/Organization Translation is required./)).toBeInTheDocument();
+    expect(screen.getByText(/Organization Translation Short is required./)).toBeInTheDocument();
   });
 
   test("Correct Error messsages on too large input", async () => {
