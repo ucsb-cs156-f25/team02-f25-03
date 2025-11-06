@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+
 export function onDeleteSuccess(message) {
   console.log(message);
   toast(message);
@@ -6,10 +7,10 @@ export function onDeleteSuccess(message) {
 
 export function cellToAxiosParamsDelete(cell) {
   return {
-    url: "/api/ucsbdiningcommonsmenuitem",
+    url: "/api/helprequests",
     method: "DELETE",
     params: {
-      id: cell.row.original.id,
+      id: cell.row.values.id,
     },
   };
 }
