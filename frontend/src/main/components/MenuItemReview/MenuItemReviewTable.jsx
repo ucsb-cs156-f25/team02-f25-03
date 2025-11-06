@@ -5,15 +5,15 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/UCSBDiningCommonsMenuItemUtils";
+} from "main/utils/menuItemReviewUtils";
 import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 
-export default function UCSBDiningCommonsMenuItemTable({ diningCommonsMenuItems, currentUser }) {
+export default function MenuItemReviewTable({ menuItemReviews, currentUser }) {
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/diningcommonsmenuitem/edit/${cell.row.original.id}`);
+    navigate(`/menuitemreview/edit/${cell.row.original.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -21,7 +21,7 @@ export default function UCSBDiningCommonsMenuItemTable({ diningCommonsMenuItems,
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/diningcommonsmenuitem/all"],
+    ["/api/menuitemreview/all"],
   );
   // Stryker restore all
 
@@ -36,27 +36,35 @@ export default function UCSBDiningCommonsMenuItemTable({ diningCommonsMenuItems,
       accessorKey: "id", // accessor is the "key" in the data
     },
     {
-      header: "DiningCommonsCode",
-      accessorKey: "diningCommonsCode",
+      header: "Item Id",
+      accessorKey: "itemId",
     },
     {
-      header: "Name",
-      accessorKey: "name",
+      header: "Reviewer Email",
+      accessorKey: "reviewerEmail",
     },
     {
-      header: "Station",
-      accessorKey: "station",
+      header: "Stars",
+      accessorKey: "stars",
+    },
+    {
+      header: "Date",
+      accessorKey: "dateReviewed",
+    },
+    {
+      header: "Comments",
+      accessorKey: "comments",
     },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
     columns.push(
-      ButtonColumn("Edit", "primary", editCallback, "UCSBDiningCommonsMenuItemTable"),
+      ButtonColumn("Edit", "primary", editCallback, "MenuItemReviewTable"),
     );
     columns.push(
-      ButtonColumn("Delete", "danger", deleteCallback, "UCSBDiningCommonsMenuItemTable"),
+      ButtonColumn("Delete", "danger", deleteCallback, "MenuItemReviewTable"),
     );
   }
 
-  return <OurTable data={diningCommonsMenuItems} columns={columns} testid={"UCSBDiningCommonsMenuItemTable"} />;
+  return <OurTable data={menuItemReviews} columns={columns} testid={"MenuItemReviewTable"} />;
 }

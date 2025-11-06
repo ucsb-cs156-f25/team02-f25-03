@@ -1,40 +1,41 @@
 import React from "react";
-import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
-import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import { http, HttpResponse } from "msw";
+import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
+import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 
 export default {
-  title: "components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable",
-  component: UCSBDiningCommonsMenuItemTable,
+  title: "components/HelpRequest/HelpRequestTable",
+  component: HelpRequestTable,
 };
 
 const Template = (args) => {
-  return <UCSBDiningCommonsMenuItemTable {...args} />;
+  return <HelpRequestTable {...args} />;
 };
 
 export const Empty = Template.bind({});
 
 Empty.args = {
-  diningCommonsMenuItems: [],
+  helpRequests: [],
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-  diningCommonsMenuItems: ucsbDiningCommonsMenuItemFixtures.threeItems,
+  helpRequests: helpRequestFixtures.threeHelpRequests,
   currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-  diningCommonsMenuItems: ucsbDiningCommonsMenuItemFixtures.threeItems,
+  helpRequests: helpRequestFixtures.threeHelpRequests,
   currentUser: currentUserFixtures.adminUser,
 };
 
 ThreeItemsAdminUser.parameters = {
   msw: [
-    http.delete("/api/diningcommonsmenuitem", () => {
+    http.delete("/api/helprequests", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
