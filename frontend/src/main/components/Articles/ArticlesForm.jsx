@@ -67,11 +67,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "URL is required.",
-            // pattern: {
-            //   value:
-            //     /^(https?:\/\/)([\w\-]+(\.[\w\-]+)+)(:[0-9]+)?(\/[\w\-._~:/?#[\]@!$&'()*+,;=%]*)?$/i,
-            //   message: "URL must start with http:// or https://",
-            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -125,12 +120,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
-            // // RFC5322-ish pragmatic email regex
-            // pattern: {
-            //   value:
-            //     /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            //   message: "Please enter a valid email address",
-            // },
           })}
         />
         <Form.Control.Feedback type="invalid">
