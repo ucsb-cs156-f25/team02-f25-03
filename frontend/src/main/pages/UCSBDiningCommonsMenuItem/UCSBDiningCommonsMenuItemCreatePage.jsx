@@ -16,7 +16,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({ storybook = false 
   });
 
   const onSuccess = (ucsbdiningcommonsmenuitem) => {
-        toast(`New ucsbdiningcommonsmenuitem Created - id: ${ucsbdiningcommonsmenuitem.id} name: ${ucsbdiningcommonsmenuitem.name}`);
+        toast(`New ucsbDiningCommonsMenuItem Created - id: ${ucsbdiningcommonsmenuitem.id} name: ${ucsbdiningcommonsmenuitem.name}`);
   };
 
   const mutation = useBackendMutation(
