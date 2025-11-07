@@ -1,52 +1,32 @@
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import HelpRequestForm from "main/components/HelpRequest/HelpRequestForm";
-import { Navigate } from "react-router";
-import { useBackendMutation } from "main/utils/useBackend";
-import { toast } from "react-toastify";
+import React from "react";
+import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
+import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { http, HttpResponse } from "msw";
 
-export default function HelpRequestCreatePage({ storybook = false }) {
-  const objectToAxiosParams = (helpRequest) => ({
-    url: "/api/helprequests/post",
-    method: "POST",
-    params: {
-      requesterEmail: helpRequest.requesterEmail,
-      teamId: helpRequest.teamId,
-      tableOrBreakoutRoom: helpRequest.tableOrBreakoutRoom,
-      requestTime: helpRequest.requestTime,
-      explanation: helpRequest.explanation,
-      solved: helpRequest.solved,
-    },
-  });
+import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
 
-  const onSuccess = (helpRequest) => {
-    toast(
-      `New helpRequest Created - id: ${helpRequest.id} requesterEmail: ${helpRequest.requesterEmail}`,
-    );
-  };
+export default {
+  title: "pages/HelpRequest/HelpRequestCreatePage",
+  component: HelpRequestCreatePage,
+};
 
-  const mutation = useBackendMutation(
-    objectToAxiosParams,
-    { onSuccess },
-    // Stryker disable next-line all : hard to set up test for caching
-    ["/api/helprequests/all"], // cache key aligned with index page/tests
-  );
+const Template = () => <HelpRequestCreatePage storybook={true} />;
 
-  const { isSuccess } = mutation;
-
-  const onSubmit = async (data) => {
-    mutation.mutate(data);
-  };
-
-  if (isSuccess && !storybook) {
-    return <Navigate to="/helprequest" />;
-  }
-
-  return (
-    <BasicLayout>
-      <div className="pt-2">
-        <h1>Create New HelpRequest</h1>
-        <HelpRequestForm submitAction={onSubmit} />
-      </div>
-    </BasicLayout>
-  );
-}
+export const Default = Template.bind({});
+Default.parameters = {
+  msw: [
+    http.get("/api/currentUser", () => {
+      return HttpResponse.json(apiCurrentUserFixtures.userOnly, {
+        status: 200,
+      });
+    }),
+    http.get("/api/systemInfo", () => {
+      return HttpResponse.json(systemInfoFixtures.showingNeither, {
+        status: 200,
+      });
+    }),
+    http.post("/api/helprequests/post", () => {
+      return HttpResponse.json({}, { status: 200 });
+    }),
+  ],
+};
