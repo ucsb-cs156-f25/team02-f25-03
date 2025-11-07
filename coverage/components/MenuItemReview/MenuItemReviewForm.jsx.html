@@ -361,7 +361,7 @@
 <span class="cline-any cline-yes">30x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form} from "react-bootstrap";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 &nbsp;
@@ -393,118 +393,118 @@ function MenuItemReviewForm({
 &nbsp;
   return (
     &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
-        {initialContents &amp;&amp; (
-            &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid={"MenuItemReviewForm-id"}
-                id="id"
-                type="text"
-                {...register("id")}
-                value={initialContents.id}
-                disabled
-            /&gt;
-            &lt;/Form.Group&gt;
-        )}
-&nbsp;
+      {initialContents &amp;&amp; (
         &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="itemId"&gt;Item Id&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid="MenuItemReviewForm-itemId"
-                id="itemId"
-                type="number"
-                isInvalid={Boolean(errors.itemId)}
-                {...register("itemId", {
-                    required: true
-                })}
-            /&gt;
-            &lt;Form.Control.Feedback type="invalid"&gt;
-                {errors.itemId &amp;&amp; "ItemId is required. "}
-            &lt;/Form.Control.Feedback&gt;
+          &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
+          &lt;Form.Control
+            data-testid={"MenuItemReviewForm-id"}
+            id="id"
+            type="text"
+            {...register("id")}
+            value={initialContents.id}
+            disabled
+          /&gt;
         &lt;/Form.Group&gt;
+      )}
 &nbsp;
-        &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="reviewerEmail"&gt;Reviewer Email&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid="MenuItemReviewForm-reviewerEmail"
-                id="reviewerEmail"
-                type="text"
-                isInvalid={Boolean(errors.reviewerEmail)}
-                {...register("reviewerEmail", {
-                    required: true,
-                    pattern: email_regex
-                })}
-            /&gt;
-            &lt;Form.Control.Feedback type="invalid"&gt;
-                {errors.reviewerEmail &amp;&amp; "ReviewerEmail is required. "}
-                {errors.reviewerEmail?.type === "pattern" &amp;&amp;
-                    "ReviewerEmail must be a valid email."}
-            &lt;/Form.Control.Feedback&gt;
-        &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="itemId"&gt;Item Id&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid="MenuItemReviewForm-itemId"
+          id="itemId"
+          type="number"
+          isInvalid={Boolean(errors.itemId)}
+          {...register("itemId", {
+            required: true,
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.itemId &amp;&amp; "ItemId is required. "}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-        &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="stars"&gt;Stars&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid="MenuItemReviewForm-stars"
-                id="stars"
-                type="number"
-                isInvalid={Boolean(errors.stars)}
-                {...register("stars", {
-                    required: true,
-                    min: 1,
-                    max: 5
-                })}
-            /&gt;
-            &lt;Form.Control.Feedback type="invalid"&gt;
-                {errors.stars &amp;&amp; "Stars is required. "}
-                {errors.stars?.type === "min" &amp;&amp; "Stars must be at least 1."}
-                {errors.stars?.type === "max" &amp;&amp; "Stars must be at most 5."}
-            &lt;/Form.Control.Feedback&gt;
-        &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="reviewerEmail"&gt;Reviewer Email&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid="MenuItemReviewForm-reviewerEmail"
+          id="reviewerEmail"
+          type="text"
+          isInvalid={Boolean(errors.reviewerEmail)}
+          {...register("reviewerEmail", {
+            required: true,
+            pattern: email_regex,
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.reviewerEmail &amp;&amp; "ReviewerEmail is required. "}
+          {errors.reviewerEmail?.type === "pattern" &amp;&amp;
+            "ReviewerEmail must be a valid email."}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-        &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="dateReviewed"&gt;Date (ISO format)&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid="MenuItemReviewForm-dateReviewed"
-                id="dateReviewed"
-                type="datetime-local"
-                isInvalid={Boolean(errors.dateReviewed)}
-                {...register("dateReviewed", {
-                    required: true,
-                    pattern: isodate_regex
-                })}
-            /&gt;
-            &lt;Form.Control.Feedback type="invalid"&gt;
-                {errors.dateReviewed &amp;&amp; "DateReviewed is required. "}
-            &lt;/Form.Control.Feedback&gt;
-        &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="stars"&gt;Stars&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid="MenuItemReviewForm-stars"
+          id="stars"
+          type="number"
+          isInvalid={Boolean(errors.stars)}
+          {...register("stars", {
+            required: true,
+            min: 1,
+            max: 5,
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.stars &amp;&amp; "Stars is required. "}
+          {errors.stars?.type === "min" &amp;&amp; "Stars must be at least 1."}
+          {errors.stars?.type === "max" &amp;&amp; "Stars must be at most 5."}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-        &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="comments"&gt;Comments&lt;/Form.Label&gt;
-            &lt;Form.Control
-                data-testid="MenuItemReviewForm-comments"
-                id="comments"
-                type="text"
-                isInvalid={Boolean(errors.comments)}
-                {...register("comments", {
-                    // not required for easier/shorter reviews that don't need fully written comments
-                })}
-            /&gt;
-            &lt;Form.Control.Feedback type="invalid"&gt;
-                {errors.comments}
-            &lt;/Form.Control.Feedback&gt;
-        &lt;/Form.Group&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="dateReviewed"&gt;Date (ISO format)&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid="MenuItemReviewForm-dateReviewed"
+          id="dateReviewed"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateReviewed)}
+          {...register("dateReviewed", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.dateReviewed &amp;&amp; "DateReviewed is required. "}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
 &nbsp;
-        &lt;Button type="submit" data-testid="MenuItemReviewForm-submit"&gt;
-            {buttonLabel}
-        &lt;/Button&gt;
-        &lt;Button
-            variant="Secondary"
-            onClick={() =&gt; navigate(-1)}
-            data-testid="MenuItemReviewForm-cancel"
-        &gt;
-            Cancel
-        &lt;/Button&gt;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="comments"&gt;Comments&lt;/Form.Label&gt;
+        &lt;Form.Control
+          data-testid="MenuItemReviewForm-comments"
+          id="comments"
+          type="text"
+          isInvalid={Boolean(errors.comments)}
+          {...register("comments", {
+            // not required for easier/shorter reviews that don't need fully written comments
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.comments}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
+&nbsp;
+      &lt;Button type="submit" data-testid="MenuItemReviewForm-submit"&gt;
+        {buttonLabel}
+      &lt;/Button&gt;
+      &lt;Button
+        variant="Secondary"
+        onClick={() =&gt; navigate(-1)}
+        data-testid="MenuItemReviewForm-cancel"
+      &gt;
+        Cancel
+      &lt;/Button&gt;
     &lt;/Form&gt;
   );
 }
@@ -517,7 +517,7 @@ export default MenuItemReviewForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-07T09:17:37.356Z
+                at 2025-11-07T18:37:22.508Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
