@@ -80,16 +80,17 @@ public class UCSBDiningCommonsMenuItemIT {
 
     UCSBDiningCommonsMenuItem ucsbDiningCommonsMenuItem1 =
         UCSBDiningCommonsMenuItem.builder()
-            .diningCommonsCode("DLG")
-            .name("Chicken")
-            .station("Breakfast")
+            .id(1L)
+            .diningCommonsCode("CRL")
+            .name("Bread")
+            .station("Dinner")
             .build();
 
     // act
     MvcResult response =
         mockMvc
             .perform(
-                post("/api/ucsbdiningcommonsmenuitem/post?diningCommonsCode=DLG&name=Chicken&station=Breakfast")
+                post("/api/ucsbdiningcommonsmenuitem/post?diningCommonsCode=CRL&name=Bread&station=Dinner")
                     .with(csrf()))
             .andExpect(status().isOk())
             .andReturn();
