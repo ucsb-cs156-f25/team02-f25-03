@@ -44,35 +44,35 @@ public class HelpRequestControllerTests extends ControllerTestCase {
 
   @Test
   public void logged_out_users_cannot_get_all() throws Exception {
-    mockMvc.perform(get("/api/HelpRequest/all")).andExpect(status().is(403));
+    mockMvc.perform(get("/api/helprequest/all")).andExpect(status().is(403));
   }
 
   @WithMockUser(roles = {"USER"})
   @Test
   public void logged_in_users_can_get_all() throws Exception {
-    mockMvc.perform(get("/api/HelpRequest/all")).andExpect(status().is(200));
+    mockMvc.perform(get("/api/helprequest/all")).andExpect(status().is(200));
   }
 
   @Test
   public void logged_out_users_cannot_post() throws Exception {
-    mockMvc.perform(post("/api/HelpRequest/post")).andExpect(status().is(403));
+    mockMvc.perform(post("/api/helprequest/post")).andExpect(status().is(403));
   }
 
   @WithMockUser(roles = {"USER"})
   @Test
   public void logged_in_regular_users_cannot_post() throws Exception {
-    mockMvc.perform(post("/api/HelpRequest/post")).andExpect(status().is(403));
+    mockMvc.perform(post("/api/helprequest/post")).andExpect(status().is(403));
   }
 
   @Test
   public void logged_out_users_cannot_put() throws Exception {
-    mockMvc.perform(put("/api/HelpRequest?id=1")).andExpect(status().is(403));
+    mockMvc.perform(put("/api/helprequest?id=1")).andExpect(status().is(403));
   }
 
   @WithMockUser(roles = {"USER"})
   @Test
   public void regular_users_cannot_put() throws Exception {
-    mockMvc.perform(put("/api/HelpRequest?id=1")).andExpect(status().is(403));
+    mockMvc.perform(put("/api/helprequest?id=1")).andExpect(status().is(403));
   }
 
   @Test
@@ -80,7 +80,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     mockMvc
         .perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete(
-                "/api/HelpRequest?id=1"))
+                "/api/helprequest?id=1"))
         .andExpect(status().is(403));
   }
 
@@ -90,7 +90,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     mockMvc
         .perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete(
-                "/api/HelpRequest?id=1"))
+                "/api/helprequest?id=1"))
         .andExpect(status().is(403));
   }
 
@@ -128,7 +128,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     when(helpRequestRepository.findAll()).thenReturn(expected);
 
     MvcResult response =
-        mockMvc.perform(get("/api/HelpRequest/all")).andExpect(status().isOk()).andReturn();
+        mockMvc.perform(get("/api/helprequest/all")).andExpect(status().isOk()).andReturn();
 
     verify(helpRequestRepository, times(1)).findAll();
     String expectedJson = mapper.writeValueAsString(expected);
@@ -167,7 +167,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     MvcResult response =
         mockMvc
             .perform(
-                post("/api/HelpRequest/post"
+                post("/api/helprequest/post"
                         + "?requesterEmail=testEmail@ucsb.edu"
                         + "&teamId=f25-4pm-3"
                         + "&tableOrBreakoutRoom=Table 3"
@@ -205,7 +205,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     when(helpRequestRepository.findById(eq(123L))).thenReturn(Optional.of(hr));
 
     MvcResult response =
-        mockMvc.perform(get("/api/HelpRequest?id=123")).andExpect(status().isOk()).andReturn();
+        mockMvc.perform(get("/api/helprequest?id=123")).andExpect(status().isOk()).andReturn();
 
     verify(helpRequestRepository, times(1)).findById(eq(123L));
     String expectedJson = mapper.writeValueAsString(hr);
@@ -220,7 +220,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
 
     MvcResult response =
         mockMvc
-            .perform(get("/api/HelpRequest?id=123"))
+            .perform(get("/api/helprequest?id=123"))
             .andExpect(status().isNotFound())
             .andReturn();
 
@@ -264,7 +264,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     MvcResult response =
         mockMvc
             .perform(
-                put("/api/HelpRequest?id=123")
+                put("/api/helprequest?id=123")
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("utf-8")
                     .content(requestBody)
@@ -310,7 +310,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     MvcResult response =
         mockMvc
             .perform(
-                put("/api/HelpRequest?id=123")
+                put("/api/helprequest?id=123")
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("utf-8")
                     .content(requestBody)
@@ -346,7 +346,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         mockMvc
             .perform(
                 org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete(
-                        "/api/HelpRequest?id=123")
+                        "/api/helprequest?id=123")
                     .with(csrf()))
             .andExpect(status().isOk())
             .andReturn();
@@ -355,7 +355,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
     verify(helpRequestRepository, times(1)).delete(existing);
 
     Map<String, Object> json = responseToJson(response);
-    assertEquals("HelpRequest with id 123 deleted", json.get("message"));
+    assertEquals("HelpRequest with id 123 was deleted", json.get("message"));
   }
 
   @WithMockUser(roles = {"ADMIN", "USER"})
@@ -367,7 +367,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         mockMvc
             .perform(
                 org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete(
-                        "/api/HelpRequest?id=123")
+                        "/api/helprequest?id=123")
                     .with(csrf()))
             .andExpect(status().isNotFound())
             .andReturn();

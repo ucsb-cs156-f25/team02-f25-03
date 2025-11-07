@@ -133,7 +133,7 @@ describe("ArticlesForm tests", () => {
     });
     fireEvent.change(emailInput, { target: { value: "alice@test.edu" } });
     const dateInput = screen.getByTestId("ArticlesForm-dateAdded");
-    fireEvent.change(dateInput, { target: { value: "2024-10-31" } });
+    fireEvent.change(dateInput, { target: { value: "2024-10-31T00:00:00" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {

@@ -98,7 +98,7 @@ function ArticlesForm({
         <Form.Control
           data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"
-          type="date"
+          type="datetime-local"
           isInvalid={Boolean(errors.dateAdded)}
           {...register("dateAdded", {
             required: "Date Added is required.",

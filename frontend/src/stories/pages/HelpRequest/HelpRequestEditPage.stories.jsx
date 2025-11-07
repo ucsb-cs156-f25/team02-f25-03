@@ -26,12 +26,12 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/ucsbdates", () => {
-      return HttpResponse.json(helpRequestFixtures.threeDates[0], {
+    http.get("/api/helprequest", () => {
+      return HttpResponse.json(helpRequestFixtures.threeHelpRequests[0], {
         status: 200,
       });
     }),
-    http.put("/api/ucsbdates", () => {
+    http.put("/api/helprequest", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],

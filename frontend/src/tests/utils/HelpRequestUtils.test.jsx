@@ -28,7 +28,7 @@ describe("HelpRequestUtils", () => {
       const cell = { row: { values: { id: 17 } } };
       const result = cellToAxiosParamsDelete(cell);
       expect(result).toEqual({
-        url: "/api/helprequests",
+        url: "/api/helprequest",
         method: "DELETE",
         params: { id: 17 },
       });

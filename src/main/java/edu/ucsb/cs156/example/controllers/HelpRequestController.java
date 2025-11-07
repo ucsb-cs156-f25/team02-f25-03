@@ -9,8 +9,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /* This is a REST controller for HelpRequest */
 @Tag(name = "HelpRequest")
-@RequestMapping("/api/HelpRequest")
+@RequestMapping("/api/helprequest")
 @RestController
 @Slf4j
 public class HelpRequestController extends ApiController {
@@ -126,7 +124,7 @@ public class HelpRequestController extends ApiController {
   @Operation(summary = "Delete a single help request")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @DeleteMapping("")
-  public Map<String, String> deleteHelpRequest(@Parameter(name = "id") @RequestParam Long id) {
+  public Object deleteHelpRequest(@Parameter(name = "id") @RequestParam Long id) {
     HelpRequest existing =
         helpRequestRepository
             .findById(id)
@@ -134,8 +132,6 @@ public class HelpRequestController extends ApiController {
 
     helpRequestRepository.delete(existing);
 
-    Map<String, String> response = new HashMap<>();
-    response.put("message", String.format("HelpRequest with id %d deleted", id));
-    return response;
+    return genericMessage("HelpRequest with id %s was deleted".formatted(id));
   }
 }
