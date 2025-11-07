@@ -1,6 +1,6 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
 import RecommendationRequestForm from "main/components/RecommendationRequest/RecommendationRequestForm";
-import { recommendationRequest } from "fixtures/recommendationRequest";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 import { BrowserRouter as Router } from "react-router";
 import { expect, vi } from "vitest";
 
@@ -28,12 +28,12 @@ describe("RecommendationRequestForm tests", () => {
   test("renders correctly when passing in a RecommendationRequest", async () => {
     render(
       <Router>
-        <RecommendationRequestForm initialContents={recommendationRequest.onerequest[0]} />
+        <RecommendationRequestForm initialContents={recommendationRequestFixtures.oneRequest} />
       </Router>,
     );
     await screen.findByTestId(/RecommendationRequestForm-id/);
     expect(screen.getByText(/Id/)).toBeInTheDocument();
-    expect(screen.getByTestId(/RecommendationRequestForm-id/)).toHaveValue("0");
+    expect(screen.getByTestId(/RecommendationRequestForm-id/)).toHaveValue("1");
   });
 
   test("Correct Error messages on missing input", async () => {
