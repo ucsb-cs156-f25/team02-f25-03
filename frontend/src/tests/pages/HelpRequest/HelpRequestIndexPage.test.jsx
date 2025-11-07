@@ -48,3 +48,4 @@ describe("HelpRequestIndexPage tests", () => {
     expect(screen.getByText("Edit")).toBeInTheDocument();
   });
 });
+

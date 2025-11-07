@@ -61,3 +61,4 @@ export default function RestaurantTable({
     <OurTable data={restaurants} columns={columns} testid={testIdPrefix} />
   );
 }
+
