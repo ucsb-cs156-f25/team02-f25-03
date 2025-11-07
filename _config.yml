@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team02-f25-03
 owner: ucsb-cs156-f25
 repo_name: team02-f25-03
-pull_requests: [{"author":{"id":"MDQ6VXNlcjg3MjU4Mjc1","is_bot":false,"login":"adamw3455","name":""},"headRefName":"Adam-BugFixes","number":132,"title":"Force consistency on helprequest naming, implement UCSBOrganizations …","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/132"},{"author":{"id":"U_kgDODf2SeQ","is_bot":false,"login":"tarang-netizen","name":""},"headRefName":"Tarang-RecommendationRequest-IntegrationTest","number":131,"title":"Added Integration Tests for RecommendationRequest","url":"https://github.com/ucsb-cs156-f25/team02-f25-03/pull/131"}]
+pull_requests: []
