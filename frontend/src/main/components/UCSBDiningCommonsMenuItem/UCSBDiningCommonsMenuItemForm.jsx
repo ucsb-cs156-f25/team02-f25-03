@@ -85,7 +85,7 @@ function UCSBDiningCommonsMenuItemForm({
 
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="station">Name</Form.Label>
+            <Form.Label htmlFor="station">Station</Form.Label>
             <Form.Control
               data-testid="UCSBDiningCommonsMenuItemForm-station"
               id="station"

@@ -65,7 +65,7 @@ describe("ArticlesCreatePage tests", () => {
       url: "https://example.com/how-to-test",
       explanation: "Step-by-step guide",
       email: "alice@test.edu",
-      dateAdded: "2024-10-31",
+      dateAdded: "2024-10-31T00:00",
     };
 
     axiosMock.onPost("/api/articles/post").reply(202, article);
@@ -93,7 +93,7 @@ describe("ArticlesCreatePage tests", () => {
     fireEvent.change(urlInput, { target: { value: "https://example.com/how-to-test" } });
     fireEvent.change(explanationInput, { target: { value: "Step-by-step guide" } });
     fireEvent.change(emailInput, { target: { value: "alice@test.edu" } });
-    fireEvent.change(dateInput, { target: { value: "2024-10-31" } });
+    fireEvent.change(dateInput, { target: { value: "2024-10-31T00:00" } });
 
     fireEvent.click(createButton);
 
@@ -105,7 +105,7 @@ describe("ArticlesCreatePage tests", () => {
       explanation: "Step-by-step guide",
       email: "alice@test.edu",
     });
-    expect(axiosMock.history.post[0].params.dateAdded).toBe("2024-10-31T00:00:00");
+    expect(axiosMock.history.post[0].params.dateAdded).toBe("2024-10-31T00:00");
 
     expect(mockToast).toBeCalledWith(
       "New article Created - id: 7 title: How to test React forms"

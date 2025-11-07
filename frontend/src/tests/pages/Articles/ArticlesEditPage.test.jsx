@@ -91,7 +91,7 @@ describe("ArticlesEditPage tests", () => {
         url: "https://example.com/how-to-write-tests",
         explanation: "short note",
         email: "alice@test.edu",
-        dateAdded: "2024-10-31",
+        dateAdded: "2024-10-31T00:00:00",
       });
 
       // PUT 成功
@@ -138,7 +138,7 @@ describe("ArticlesEditPage tests", () => {
       expect(urlField).toHaveValue("https://example.com/how-to-write-tests");
       expect(explanationField).toHaveValue("short note");
       expect(emailField).toHaveValue("alice@test.edu");
-      expect(dateAddedField).toHaveValue("2024-10-31");
+      expect(dateAddedField).toHaveValue("2024-10-31T00:00");
       expect(submitButton).toHaveTextContent("Update");
 
       fireEvent.change(titleField, { target: { value: "How to write better tests" } });
