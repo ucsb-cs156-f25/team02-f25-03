@@ -21,29 +21,35 @@ function UCSBOrganizationForm({
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
-      {initialContents && (
         <Form.Group className="mb-3">
-          <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
-          <Form.Control
-            data-testid={testIdPrefix + "-orgCode"}
-            id="orgCode"
-            type="text"
-            {...register("orgCode")}
-            value={initialContents.id}
-            disabled
-          />
-        </Form.Group>
-      )}
+        <Form.Label htmlFor="orgCode">Organization Code</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-orgCode"}
+          id="orgCode"
+          type="text"
+          isInvalid={Boolean(errors.orgCode)}
+          {...register("orgCode", {
+            required: "Organization Code is required.",
+            maxLength: {
+              value: 25,
+              message: "Max length 25 characters",
+            },
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.orgCode?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="orgTranslationShort">Organization Short Translation</Form.Label>
+        <Form.Label htmlFor="orgTranslationShort">Organization Translation Short</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-orgTranslationShort"}
           id="orgTranslationShort"
           type="text"
           isInvalid={Boolean(errors.orgTranslationShort)}
           {...register("orgTranslationShort", {
-            required: "Organization Short Translation is required.",
+            required: "Organization Translation Short is required.",
             maxLength: {
               value: 50,
               message: "Max length 50 characters",
