@@ -1,16 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures"
 import { http, HttpResponse } from "msw";
 
-import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
+import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
 
 export default {
-  title: "pages/HelpRequest/HelpRequestCreatePage",
-  component: HelpRequestCreatePage,
+  title: "pages/RecommendationRequest/RecommendationRequestEditPage",
+  component: RecommendationRequestEditPage,
 };
 
-const Template = () => <HelpRequestCreatePage storybook={true} />;
+const Template = () => <RecommendationRequestEditPage storybook={true} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -25,7 +26,12 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.post("/api/helprequests/post", () => {
+    http.get("/api/recommendationrequest", () => {
+      return HttpResponse.json(recommendationRequestFixtures.threeRequests[0], {
+        status: 200,
+      });
+    }),
+    http.put("/api/recommendationrequest", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
