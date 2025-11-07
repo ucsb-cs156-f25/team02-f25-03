@@ -28,7 +28,7 @@ describe("RecommendationRequestForm tests", () => {
   test("renders correctly when passing in a RecommendationRequest", async () => {
     render(
       <Router>
-        <RecommendationRequestForm initialContents={recommendationRequestFixtures.oneRequest} />
+        <RecommendationRequestForm initialContents={recommendationRequestFixtures.oneRequest[0]} />
       </Router>,
     );
     await screen.findByTestId(/RecommendationRequestForm-id/);

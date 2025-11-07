@@ -1,42 +1,44 @@
 const recommendationRequestFixtures = {
-  oneRequest: {
+  oneRequest: [
+    {
     id: 1,
-    requesterEmail: "johndoe@ucsb.edu",
-    professorEmail: "profsmith@ucsb.edu",
-    explanation: "pls give letters for masters apps",
-    dateRequested: "2025-11-04T08:00:00",
-    dateNeeded: "2025-11-05T05:00:00",
-    done: true
-  },
+    requesterEmail: "student1@ucsb.edu",
+    professorEmail: "prof1@ucsb.edu",
+    explanation: "Grad school recommendation",
+    dateRequested: "2025-11-04T04:58:52.791Z",
+    dateNeeded: "2025-12-01T04:58:52.791Z",
+    done: false,
+    },
+  ],
   threeRequests: [
     {
       id: 1,
-      requesterEmail: "johndoe@ucsb.edu",
-      professorEmail: "profsmith@ucsb.edu",
-      explanation: "pls give letters for masters apps",
-      dateRequested: "2025-11-04T08:00:00",
-      dateNeeded: "2025-11-05T05:00:00",
-      done: true
+      requesterEmail: "student1@ucsb.edu",
+      professorEmail: "prof1@ucsb.edu",
+      explanation: "Grad school recommendation",
+      dateRequested: "2025-11-04T04:58:52.791Z",
+      dateNeeded: "2025-12-01T04:58:52.791Z",
+      done: false,
     },
     {
       id: 2,
-      requesterEmail: "janedoe@ucsb.edu",
-      professorEmail: "profjones@ucsb.edu",
-      explanation: "Letter of rec needed for PhD applications. Deadline is Dec 1st.",
-      dateRequested: "2025-11-05T10:30:00",
-      dateNeeded: "2025-12-01T08:00:00",
-      done: false
+      requesterEmail: "student2@ucsb.edu",
+      professorEmail: "prof2@ucsb.edu",
+      explanation: "Scholarship reference",
+      dateRequested: "2025-11-05T04:58:52.791Z",
+      dateNeeded: "2025-12-10T04:58:52.791Z",
+      done: true,
     },
     {
       id: 3,
-      requesterEmail: "alexrivera@ucsb.edu",
-      professorEmail: "profsmith@ucsb.edu",
-      explanation: "Following up on request for internship recommendation letter.",
-      dateRequested: "2025-11-01T14:00:00",
-      dateNeeded: "2025-11-15T23:59:59",
-      done: false
-    }
-  ]
+      requesterEmail: "student3@ucsb.edu",
+      professorEmail: "prof3@ucsb.edu",
+      explanation: "Job recommendation",
+      dateRequested: "2025-11-06T04:58:52.791Z",
+      dateNeeded: "2025-12-15T04:58:52.791Z",
+      done: false,
+    },
+  ],
 };
 
 export { recommendationRequestFixtures };
