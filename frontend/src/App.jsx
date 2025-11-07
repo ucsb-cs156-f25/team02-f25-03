@@ -20,6 +20,10 @@ import { hasRole, useCurrentUser } from "main/utils/useCurrentUser";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-toastify/dist/ReactToastify.css";
 
+import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
+import RecommendationRequest from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
+import RecommendationRequest from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
+
 function App() {
   const currentUser = useCurrentUser();
 
@@ -87,6 +91,47 @@ function App() {
           />
         </>
       )}
+<<<<<<< Updated upstream
+=======
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route exact path="/articles" element={<ArticlesIndexPage />} />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/articles/edit/:id"
+            element={<ArticlesEditPage />}
+          />
+          <Route
+            exact
+            path="/articles/create"
+            element={<ArticlesCreatePage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route exact path="/recommendationrequest" element={<RecommendationRequestIndexPage />} />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/recommendationrequest/edit/:id"
+            element={<RecommendationRequestEditPage />}
+          />
+          <Route
+            exact
+            path="/recommendationrequest/create"
+            element={<RecommendationRequestCreatePage />}
+          />
+        </>
+      )}
+>>>>>>> Stashed changes
     </Routes>
   );
 }
