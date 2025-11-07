@@ -44,6 +44,7 @@ import { hasRole, useCurrentUser } from "main/utils/useCurrentUser";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function App() {
   const currentUser = useCurrentUser();
 
