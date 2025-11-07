@@ -20,9 +20,9 @@ describe("UCSBOrganization tests", () => {
         <UCSBOrganizationForm />
       </Router>,
     );
-    await screen.findByText(/Organization Short Translation/);
+    await screen.findByText(/Organization Translation Short/);
     await screen.findByText(/Create/);
-    expect(screen.getByText(/Organization Short Translation/)).toBeInTheDocument();
+    expect(screen.getByText(/Organization Translation Short/)).toBeInTheDocument();
   });
 
   test("renders correctly when passing in a UCSBOrganization", async () => {
@@ -47,8 +47,9 @@ describe("UCSBOrganization tests", () => {
 
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Organization Short Translation is required./);
+    await screen.findByText(/Organization Code is required./);
     expect(screen.getByText(/Organization Translation is required./)).toBeInTheDocument();
+    expect(screen.getByText(/Organization Translation Short is required./)).toBeInTheDocument();
   });
 
   test("Correct Error messsages on too large input", async () => {
@@ -61,15 +62,18 @@ describe("UCSBOrganization tests", () => {
     );
     await screen.findByTestId("UCSBOrganizationForm-orgTranslationShort");
 
+    const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
     const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
     const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
     const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
+    fireEvent.change(orgCodeField, { target: { value: "UCSBOrganizationForm-orgCodeTOOOOOOOOOOOOLOOOOOOOOONNNGGG" } });
     fireEvent.change(orgTranslationShortField, { target: { value: "UCSBOrganizationForm-orgTranslationTOOOOOOOOOOOOLOOOOOOOOONNNGGG" } });
     fireEvent.change(orgTranslationField, { target: { value: "UCSBOrganizationForm-orgTranslationWAAAAAAAAAAAAAAYYYYTOOOOOOOOOOOOLOOOOOOOOONNNGGG" } });
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Max length 50 characters/);
+    await screen.findByText(/Max length 25 characters/);
+    expect(screen.getByText(/Max length 50 characters/)).toBeInTheDocument();
     expect(screen.getByText(/Max length 75 characters/)).toBeInTheDocument();
   });
 
@@ -83,11 +87,13 @@ describe("UCSBOrganization tests", () => {
     );
     await screen.findByTestId("UCSBOrganizationForm-orgTranslationShort");
 
+    const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");    
     const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
     const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
     const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
     const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
+    fireEvent.change(orgCodeField, { target: { value: "GDC" } });
     fireEvent.change(orgTranslationShortField, { target: { value: "Game Dev Club" } });
     fireEvent.change(orgTranslationField, { target: { value: "Game Development Club" } });
     fireEvent.change(inactiveField, {
@@ -97,6 +103,9 @@ describe("UCSBOrganization tests", () => {
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
+    expect(
+      screen.queryByText(/Organization Code is required./),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByText(/Organization Translation Short is required./),
     ).not.toBeInTheDocument();
