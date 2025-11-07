@@ -5,7 +5,7 @@ import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
 } from "main/utils/HelpRequestUtils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 
 export default function HelpRequestTable({ helpRequests, currentUser }) {

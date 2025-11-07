@@ -3,14 +3,14 @@ import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 import HelpRequestTable from "main/components/HelpRequest/HelpRequestTable";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
 const mockedNavigate = vi.fn();
-vi.mock("react-router-dom", async () => {
-  const originalModule = await vi.importActual("react-router-dom");
+vi.mock("react-router", async () => {
+  const originalModule = await vi.importActual("react-router");
   return {
     ...originalModule,
     useNavigate: () => mockedNavigate,
