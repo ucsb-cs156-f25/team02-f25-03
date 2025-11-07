@@ -35,10 +35,15 @@ import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenu
 import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
 
+import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
+import RecommendationRequestCreatePage from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
+import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/useCurrentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const currentUser = useCurrentUser();
@@ -116,13 +121,32 @@ function App() {
         <>
           <Route
             exact
-            path="/ucsborganization/edit/:id"
+            path="/ucsborganization/edit/:orgCode"
             element={<UCSBOrganizationEditPage />}
           />
           <Route
             exact
             path="/ucsborganization/create"
             element={<UCSBOrganizationCreatePage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route exact path="/recommendationrequest" element={<RecommendationRequestIndexPage />} />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/recommendationrequest/edit/:id"
+            element={<RecommendationRequestEditPage />}
+          />
+          <Route
+            exact
+            path="/recommendationrequest/create"
+            element={<RecommendationRequestCreatePage />}
           />
         </>
       )}
@@ -142,6 +166,25 @@ function App() {
             exact
             path="/helprequest/create"
             element={<HelpRequestCreatePage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/ucsbdates/edit/:id"
+            element={<UCSBDatesEditPage />}
+          />
+          <Route
+            exact
+            path="/ucsbdates/create"
+            element={<UCSBDatesCreatePage />}
           />
         </>
       )}
