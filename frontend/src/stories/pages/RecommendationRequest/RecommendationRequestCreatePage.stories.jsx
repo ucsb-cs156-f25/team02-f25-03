@@ -3,14 +3,14 @@ import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
-import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
+import RecommendationRequestCreatePage from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
 
 export default {
-  title: "pages/Restaurants/RestaurantCreatePage",
-  component: RestaurantCreatePage,
+  title: "pages/RecommendationRequest/RecommendationRequestCreatePage",
+  component: RecommendationRequestCreatePage,
 };
 
-const Template = () => <RestaurantCreatePage storybook={true} />;
+const Template = () => <RecommendationRequestCreatePage storybook={true} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -25,7 +25,7 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.post("/api/restaurants/post", () => {
+    http.post("/api/recommendationrequest/post", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
