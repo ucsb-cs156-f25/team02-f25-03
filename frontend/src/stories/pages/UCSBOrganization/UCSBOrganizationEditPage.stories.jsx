@@ -1,16 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { organizationFixtures } from "fixtures/organizationFixtures";
 import { http, HttpResponse } from "msw";
 
-import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
 
 export default {
-  title: "pages/HelpRequest/HelpRequestCreatePage",
-  component: HelpRequestCreatePage,
+  title: "pages/UCSBOrganization/UCSBOrganizationEditPage",
+  component: UCSBOrganizationEditPage,
 };
 
-const Template = () => <HelpRequestCreatePage storybook={true} />;
+const Template = () => <UCSBOrganizationEditPage storybook={true} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -25,7 +26,12 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.post("/api/helprequest/post", () => {
+    http.get("/api/ucsborganization", () => {
+      return HttpResponse.json(organizationFixtures.threeOrganizations[0], {
+        status: 200,
+      });
+    }),
+    http.put("/api/ucsborganization", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
