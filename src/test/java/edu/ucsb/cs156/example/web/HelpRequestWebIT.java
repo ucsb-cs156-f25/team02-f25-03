@@ -19,7 +19,7 @@ public class HelpRequestWebIT extends WebTestCase {
 
   @Test
   public void admin_can_create_and_delete_helprequest() throws Exception {
-    setupUser(false);
+    setupUser(true);
     page.locator("a[href='/helprequest']").click();
 
     page.getByText("Create HelpRequest").click();
