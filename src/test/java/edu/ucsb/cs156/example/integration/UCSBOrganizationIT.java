@@ -1,7 +1,6 @@
 package edu.ucsb.cs156.example.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -51,13 +50,22 @@ public class UCSBOrganizationIT {
   public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
     // arrange
 
-    UCSBOrganization organization = UCSBOrganization.builder().orgCode("GDC").orgTranslationShort("Game Dev CLub").orgTranslation("Game Development Clubt").inactive(true).build();
+    UCSBOrganization organization =
+        UCSBOrganization.builder()
+            .orgCode("GDC")
+            .orgTranslationShort("Game Dev CLub")
+            .orgTranslation("Game Development Clubt")
+            .inactive(true)
+            .build();
 
     organizationRepository.save(organization);
 
     // act
     MvcResult response =
-        mockMvc.perform(get("/api/ucsborganization?orgCode=GDC")).andExpect(status().isOk()).andReturn();
+        mockMvc
+            .perform(get("/api/ucsborganization?orgCode=GDC"))
+            .andExpect(status().isOk())
+            .andReturn();
 
     // assert
     String expectedJson = mapper.writeValueAsString(organization);
