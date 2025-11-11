@@ -28,4 +28,24 @@ public class ArticleWebIT extends WebTestCase {
 
     assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title")).not().isVisible();
   }
+
+  @Test
+  public void admin_user_can_create_article() throws Exception {
+    setupUser(true);
+
+    page.getByText("Articles").click();
+
+    page.getByText("Create Article").click();
+
+    page.getByTestId("ArticlesForm-title").fill("Article1");
+    page.getByTestId("ArticlesForm-url").fill("https://article1.com");
+    page.getByTestId("ArticlesForm-explanation").fill("This is the explanation for article #1.");
+    page.getByTestId("ArticlesForm-email").fill("article1@email.com");
+
+    page.getByTestId("ArticlesForm-dateAdded").fill("2025-10-27T13:45");
+
+    page.getByTestId("ArticlesForm-submit").click();
+
+    assertThat(page.getByTestId("ArticlesTable-cell-row-0-col-title")).hasText("Article1");
+  }
 }
